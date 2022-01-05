@@ -1,5 +1,6 @@
 FROM php:8.1.0-apache
 
+# Update
 RUN apt-get update
 
 # Install composer
