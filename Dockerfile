@@ -19,12 +19,19 @@ RUN apt-get install libpq-dev -y
 
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && docker-php-ext-install pdo_pgsql pgsql
 
+# MySQL
+RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
+
+# .htaccess permissions
 RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
+# Enable Apache mod rewrite
 RUN a2enmod rewrite
 
+# Set default directory
 WORKDIR /var/www/html
 
+# Set permissions
 RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 
 # xdebug 3.x (NOT 2.x)
