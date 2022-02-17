@@ -43,11 +43,15 @@ RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 #    && echo "xdebug.client_host = host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
 
 ## Install Node.js 16.x(if needed)
-#RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-#RUN apt-get install -y nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt-get install -y nodejs
 
 # Set Apache webroot to "public" folder (for Laravel)
 RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/install-php-extensions
+RUN docker-php-ext-install bcmath
