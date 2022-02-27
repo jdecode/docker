@@ -1,0 +1,30 @@
+version : "3"
+services:
+  gitoker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gitoker
+    restart: always
+    volumes:
+      - .:/var/www/html
+      - ~/.ssh/fl-qaing-542d27bd99b2.json:/var/www/html/fl-qaing-542d27bd99b2.json
+    ports:
+      - "8082:80"
+    environment:
+      APP_NAME: 'GCP APIs PoC'
+      APP_ENV: 'local'
+      APP_DEBUG: 'true'
+      APP_URL: 'http://220.216.1.1'
+      GOOGLE_APPLICATION_CREDENTIALS: "/var/www/html/fl-qaing-542d27bd99b2.json"
+    networks:
+      gitoker-network:
+        ipv4_address: 220.216.1.1
+
+# Local network for services running using this docker-compose config
+networks:
+  gitoker-network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 220.216.0.0/16

@@ -1,0 +1,16 @@
+{
+    "name": "jdecode/php-gcp-apis",
+    "description": "PHP 8.1, supporting GCP APIs",
+    "type": "metapackage",
+    "require": {
+        "ext-bcmath": "*",
+        "google/cloud-language": "^0.26.3",
+        "grpc/grpc": "^1.42"
+    },
+    "authors": [
+        {
+            "name": "Jagdeep Singh",
+            "email": "jdecode@gmail.com"
+        }
+    ]
+}
