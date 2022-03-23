@@ -36,9 +36,9 @@ RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 #    && echo "xdebug.client_host = host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
 
 
-## Install Node.js 16.x(if needed) & newman
+## Install Node.js 16.x(if needed) & newman~
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get install -y nodejs && apt-get -y install npm
+RUN apt-get install -y nodejs
 RUN npm install -g npm@latest
 RUN npm install -g newman
 RUN newman --version
