@@ -35,9 +35,13 @@ RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 #    && echo "xdebug.discover_client_host = on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
 #    && echo "xdebug.client_host = host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
 
-## Install Node.js 16.x(if needed)
-#RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-#RUN apt-get install -y nodejs
+
+## Install Node.js 16.x(if needed) & newman
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt-get install -y nodejs && apt-get -y install npm
+RUN npm install -g npm@latest
+RUN npm install -g newman
+RUN newman --version
 
 # Set Apache webroot to "public" folder (for Laravel)
 RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
