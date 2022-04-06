@@ -19,6 +19,8 @@ RUN apt-get install libpq-dev -y
 
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && docker-php-ext-install pdo_pgsql pgsql
 
+RUN apt-get install libcurl4-openssl-dev -y
+
 RUN docker-php-ext-install curl
 
 RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
