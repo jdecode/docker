@@ -35,9 +35,9 @@ RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 RUN echo "xdebug.mode = debug,coverage" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.start_with_request = yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo 'xdebug.remote_port=9003' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \ 
-    && echo 'xdebug.remote_enable=1' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo 'xdebug.remote_connect_back=1' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    && echo "xdebug.remote_port = 9003" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \ 
+    && echo "xdebug.remote_enable = 1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_connect_back = 1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 ## Install Node.js 16.x(if needed) & newman
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
